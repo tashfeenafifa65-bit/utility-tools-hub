@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Age Calculator - Free Online Tools{% endblock %}
+{% block description %}Calculate your exact age in years, months, days, hours, and minutes with our easy-to-use Age Calculator.{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="tool-header text-center">
+        <h1>Age Calculator</h1>
+        <p>Find out exactly how old you are down to the day.</p>
+    </div>
+
+    <div class="tool-container">
+        <div class="input-group">
+            <label for="birth-date">Enter your Date of Birth:</label>
+            <input type="date" id="birth-date" required>
+        </div>
+        <button class="btn" onclick="calculateAge()">Calculate Age</button>
+
+        <div id="result" class="result-area">
+            <h3>Your Age Is:</h3>
+            <div id="age-result-content"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function calculateAge() {
+        const birthDateInput = document.getElementById('birth-date').value;
+        if (!birthDateInput) {
+            alert('Please select a date');
+            return;
+        }
+
+        const birthDate = new Date(birthDateInput);
+        const today = new Date();
+
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+            months--;
+            const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        const resultContent = `
+            <p><strong>${years}</strong> Years</p>
+            <p><strong>${months}</strong> Months</p>
+            <p><strong>${days}</strong> Days</p>
+        `;
+
+        const resultDiv = document.getElementById('result');
+        document.getElementById('age-result-content').innerHTML = resultContent;
+        resultDiv.style.display = 'block';
+    }
+</script>
+{% endblock %}

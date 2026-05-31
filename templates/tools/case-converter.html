@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Case Converter - Free Online Tools{% endblock %}
+{% block description %}Convert your text to Uppercase, Lowercase, Title Case, or Sentence Case instantly.{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="tool-header text-center">
+        <h1>Case Converter</h1>
+        <p>Change your text case with a single click.</p>
+    </div>
+
+    <div class="tool-container">
+        <div class="input-group">
+            <label for="case-text">Enter your text:</label>
+            <textarea id="case-text" rows="8" placeholder="Paste your text here..."></textarea>
+        </div>
+        
+        <div class="btn-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn" onclick="convertCase('upper')">UPPERCASE</button>
+            <button class="btn" onclick="convertCase('lower')">lowercase</button>
+            <button class="btn" onclick="convertCase('title')">Title Case</button>
+            <button class="btn" onclick="convertCase('sentence')">Sentence case</button>
+        </div>
+
+        <div id="result" class="result-area" style="margin-top: 2rem;">
+            <label>Converted Text:</label>
+            <textarea id="case-result" rows="8" readonly style="background: rgba(0,0,0,0.2);"></textarea>
+            <button class="btn" style="margin-top: 1rem; padding: 0.5rem 1rem;" onclick="copyResult()">Copy to Clipboard</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function convertCase(type) {
+        const text = document.getElementById('case-text').value;
+        let result = '';
+
+        if (type === 'upper') {
+            result = text.toUpperCase();
+        } else if (type === 'lower') {
+            result = text.toLowerCase();
+        } else if (type === 'title') {
+            result = text.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        } else if (type === 'sentence') {
+            result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
+        }
+
+        document.getElementById('case-result').value = result;
+        document.getElementById('result').style.display = 'block';
+    }
+
+    function copyResult() {
+        const result = document.getElementById('case-result').value;
+        navigator.clipboard.writeText(result).then(() => {
+            alert('Text copied to clipboard!');
+        });
+    }
+</script>
+{% endblock %}

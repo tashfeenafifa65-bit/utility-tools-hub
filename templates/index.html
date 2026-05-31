@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="container" data-aos="fade-up">
+        <h1>All the Tools You Need, <br><span>All in One Place.</span></h1>
+        <p>Fast, free, and secure online utility tools to simplify your daily digital tasks. No installation, no hassle.</p>
+    </div>
+</section>
+
+<section id="tools" class="tools-section">
+    <div class="container">
+        <div class="tools-grid">
+            {% for tool in tools %}
+            <a href="{{ url_for('tool_page', tool_id=tool.id) }}" class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas {{ tool.icon }}"></i>
+                </div>
+                <h3>{{ tool.name }}</h3>
+                <p>{{ tool.description }}</p>
+                <div class="tool-action">
+                    <span>Try Now</span> <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <h2>Have a tool suggestion?</h2>
+            <p>We are constantly adding new tools. Let us know what you'd like to see next!</p>
+            <a href="#" class="btn">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
