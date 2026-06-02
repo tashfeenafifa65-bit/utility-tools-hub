@@ -78,5 +78,9 @@ def robots():
 def sitemap():
     return send_from_directory('static', 'sitemap.xml')
 
+    @app.route('/googled3f9ca86626307df.html')
+def google_verification():
+    return send_from_directory('.', 'googled3f9ca86626307df.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
