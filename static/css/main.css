@@ -315,6 +315,7 @@ input:focus, textarea:focus {
     margin: 50px auto;
     padding: 30px;
     background: #ffffff;
+    color: #1e293b;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
@@ -323,11 +324,43 @@ input:focus, textarea:focus {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 15px;
+    color: #111827;
 }
 
-.seo-content p {
+.seo-content h3 {
+    color: #1f2937;
+    margin-top: 20px;
+}
+
+.seo-content p,
+.seo-content li {
+    color: #374151;
     line-height: 1.8;
     text-align: justify;
+}
+
+.seo-content ul {
+    padding-left: 25px;
+}
+
+.seo-content details {
+    margin: 12px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.seo-content summary {
+    font-weight: bold;
+    font-size: 16px;
+    color: #111827;
+    cursor: pointer;
+}
+
+.seo-content details p {
+    margin-top: 10px;
+    color: #374151;
 }
 
 .faq-section details {
