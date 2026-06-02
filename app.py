@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, send_from_directory
 import datetime
 import os
 from flask_sqlalchemy import SQLAlchemy
@@ -68,6 +68,15 @@ def contact():
         # Future: Save to DB
         return "Message sent successfully!"
     return render_template('contact.html')
+from flask import send_from_directory
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml')
 
 if __name__ == '__main__':
     app.run(debug=True)
