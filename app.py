@@ -23,6 +23,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'qr-code-generator', 'name': 'QR Code Generator', 'description': 'Generate QR codes instantly for URLs and text.', 'icon': 'fa-qrcode'},
         {'id': 'bmi-calculator', 'name': 'BMI Calculator', 'description': 'Calculate your Body Mass Index instantly using height and weight.', 'icon': 'fa-heartbeat'},
         {'id': 'age-calculator', 'name': 'Age Calculator', 'description': 'Calculate your exact age in years, months, and days.', 'icon': 'fa-calendar-alt'},
         {'id': 'word-counter', 'name': 'Word Counter', 'description': 'Analyze text for word count, character count, and more.', 'icon': 'fa-text-height'},
@@ -79,6 +80,9 @@ def robots():
 def sitemap():
     return send_from_directory('static', 'sitemap.xml')
 
+@app.route('/tool/qr-code-generator')
+def qr_code_generator():
+    return render_template('tools/qr-code-generator.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

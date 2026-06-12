@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}QR Code Generator - Free Online Tool{% endblock %}
+
+{% block description %}
+Generate QR codes instantly for URLs, text, emails, and more with our free QR Code Generator.
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+```
+<div class="tool-header text-center">
+    <h1>QR Code Generator</h1>
+    <p>Create QR codes instantly for websites, text, and more.</p>
+</div>
+
+<div class="tool-container">
+
+    <div class="input-group">
+        <label>Enter Text or URL</label>
+        <input type="text" id="qrText" placeholder="https://example.com">
+    </div>
+
+    <button class="btn" onclick="generateQR()">
+        Generate QR Code
+    </button>
+
+    <div id="result" class="result-area">
+        <canvas id="qrcode"></canvas>
+    </div>
+
+</div>
+
+<div class="seo-content">
+
+    <h2>How to Use the QR Code Generator</h2>
+    <p>
+        Enter any website URL, text, email address, or phone number and click
+        Generate QR Code. Your QR code will be created instantly.
+    </p>
+
+    <h2>Benefits of QR Codes</h2>
+    <ul>
+        <li>Share links quickly</li>
+        <li>Easy mobile access</li>
+        <li>Useful for marketing campaigns</li>
+        <li>No typing required</li>
+    </ul>
+
+    <div class="faq-section">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+            <summary>Are QR codes free?</summary>
+            <p>Yes, you can generate unlimited QR codes for free.</p>
+        </details>
+
+        <details>
+            <summary>Can I create QR codes for URLs?</summary>
+            <p>Yes. URLs are one of the most common uses for QR codes.</p>
+        </details>
+
+        <details>
+            <summary>Do QR codes expire?</summary>
+            <p>No. Static QR codes remain active permanently.</p>
+        </details>
+
+    </div>
+
+</div>
+```
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+
+<script>
+function generateQR() {
+
+    const text = document.getElementById("qrText").value;
+
+    if (!text) {
+        alert("Please enter text or URL");
+        return;
+    }
+
+    new QRious({
+        element: document.getElementById("qrcode"),
+        value: text,
+        size: 250
+    });
+
+    document.getElementById("result").style.display = "block";
+}
+</script>
+
+{% endblock %}
