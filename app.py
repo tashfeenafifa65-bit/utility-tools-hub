@@ -23,6 +23,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'bmi-calculator', 'name': 'BMI Calculator', 'description': 'Calculate your Body Mass Index instantly using height and weight.', 'icon': 'fa-heartbeat'},
         {'id': 'age-calculator', 'name': 'Age Calculator', 'description': 'Calculate your exact age in years, months, and days.', 'icon': 'fa-calendar-alt'},
         {'id': 'word-counter', 'name': 'Word Counter', 'description': 'Analyze text for word count, character count, and more.', 'icon': 'fa-text-height'},
         {'id': 'password-generator', 'name': 'Password Generator', 'description': 'Generate secure, random passwords with custom options.', 'icon': 'fa-lock'},
@@ -78,9 +79,6 @@ def robots():
 def sitemap():
     return send_from_directory('static', 'sitemap.xml')
 
-    @app.route('/googled3f9ca86626307df.html')
-def google_verification():
-    return send_from_directory('.', 'googled3f9ca86626307df.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
