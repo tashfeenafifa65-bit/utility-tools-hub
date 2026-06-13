@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Image Converter - Convert JPG, PNG, WEBP Online{% endblock %}
+
+{% block description %}
+Convert images between JPG, PNG, WEBP and other formats online for free.
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="tool-header text-center">
+        <h1>Image Converter</h1>
+        <p>Convert images between JPG, PNG and WEBP formats instantly.</p>
+    </div>
+
+    <div class="tool-container">
+
+        <div class="input-group">
+            <label>Select Image</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+
+        <div class="input-group">
+            <label>Convert To</label>
+            <select id="format">
+                <option value="image/png">PNG</option>
+                <option value="image/jpeg">JPG</option>
+                <option value="image/webp">WEBP</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="convertImage()">
+            Convert Image
+        </button>
+
+        <div id="result" class="result-area">
+            <a id="downloadLink" class="btn" download>
+                Download Converted Image
+            </a>
+        </div>
+
+    </div>
+
+    <div class="seo-content">
+
+        <h2>What Is an Image Converter?</h2>
+
+        <p>
+            An image converter allows you to change image formats such as JPG,
+            PNG, and WEBP. This helps improve compatibility, reduce file size,
+            and optimize images for websites and social media.
+        </p>
+
+        <h2>Supported Formats</h2>
+
+        <ul>
+            <li>JPG to PNG</li>
+            <li>PNG to JPG</li>
+            <li>JPG to WEBP</li>
+            <li>WEBP to JPG</li>
+        </ul>
+
+        <h2>How to Use</h2>
+
+        <ol>
+            <li>Select an image.</li>
+            <li>Choose the output format.</li>
+            <li>Click Convert Image.</li>
+            <li>Download the converted file.</li>
+        </ol>
+
+        <div class="faq-section">
+
+            <h2>Frequently Asked Questions</h2>
+
+            <details>
+                <summary>Which formats are supported?</summary>
+                <p>Currently JPG, PNG, and WEBP formats are supported.</p>
+            </details>
+
+            <details>
+                <summary>Will image quality be affected?</summary>
+                <p>Quality depends on the selected format and compression method.</p>
+            </details>
+
+            <details>
+                <summary>Is this tool free?</summary>
+                <p>Yes, our Image Converter is completely free to use.</p>
+            </details>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+function convertImage() {
+
+    const file = document.getElementById('imageInput').files[0];
+
+    if (!file) {
+        alert('Please select an image');
+        return;
+    }
+
+    const format = document.getElementById('format').value;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+
+        const img = new Image();
+
+        img.onload = function() {
+
+            const canvas = document.createElement('canvas');
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            const converted = canvas.toDataURL(format);
+
+            const downloadLink =
+                document.getElementById('downloadLink');
+
+            downloadLink.href = converted;
+
+            let extension = "png";
+
+            if(format === "image/jpeg") extension = "jpg";
+            if(format === "image/webp") extension = "webp";
+
+            downloadLink.download =
+                "converted-image." + extension;
+
+            document.getElementById('result').style.display = 'block';
+        };
+
+        img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+</script>
+{% endblock %}
