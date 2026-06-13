@@ -23,6 +23,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'meta-tag-generator', 'name': 'Meta Tag Generator', 'description': 'Generate SEO meta tags for your website instantly.', 'icon': 'fa-code'},
         {'id': 'qr-code-generator', 'name': 'QR Code Generator', 'description': 'Generate QR codes instantly for URLs and text.', 'icon': 'fa-qrcode'},
         {'id': 'bmi-calculator', 'name': 'BMI Calculator', 'description': 'Calculate your Body Mass Index instantly using height and weight.', 'icon': 'fa-heartbeat'},
         {'id': 'age-calculator', 'name': 'Age Calculator', 'description': 'Calculate your exact age in years, months, and days.', 'icon': 'fa-calendar-alt'},
