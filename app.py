@@ -23,6 +23,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'percentage-calculator', 'name': 'Percentage Calculator', 'description': 'Calculate percentages, increases, decreases and percentage differences instantly.', 'icon': 'fa-percent'},
         {'id': 'image-format-converter', 'name': 'Image Format Converter', 'description': 'Convert images between JPG, PNG, WEBP and other popular formats.', 'icon': 'fa-image'},
         {'id': 'meta-tag-generator', 'name': 'Meta Tag Generator', 'description': 'Generate SEO meta tags for your website instantly.', 'icon': 'fa-code'},
         {'id': 'qr-code-generator', 'name': 'QR Code Generator', 'description': 'Generate QR codes instantly for URLs and text.', 'icon': 'fa-qrcode'},

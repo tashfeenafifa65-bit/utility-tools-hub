@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Percentage Calculator - Free Online Percentage Tool{% endblock %}
+
+{% block description %}
+Calculate percentages, percentage increase, percentage decrease, and percentage differences instantly with our free online Percentage Calculator.
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+```
+<div class="tool-header text-center">
+    <h1>Percentage Calculator</h1>
+    <p>Calculate percentages quickly and accurately.</p>
+</div>
+
+<div class="tool-container">
+
+    <h2>What is X% of Y?</h2>
+
+    <div class="input-group">
+        <input type="number" id="percent1" placeholder="Percentage">
+    </div>
+
+    <div class="input-group">
+        <input type="number" id="number1" placeholder="Number">
+    </div>
+
+    <button class="btn" onclick="calculatePercentage()">
+        Calculate
+    </button>
+
+    <div id="result1" class="result-area"></div>
+
+    <hr style="margin:40px 0;">
+
+    <h2>X is What Percent of Y?</h2>
+
+    <div class="input-group">
+        <input type="number" id="value2" placeholder="Value">
+    </div>
+
+    <div class="input-group">
+        <input type="number" id="total2" placeholder="Total">
+    </div>
+
+    <button class="btn" onclick="calculatePercentOf()">
+        Calculate
+    </button>
+
+    <div id="result2" class="result-area"></div>
+
+    <hr style="margin:40px 0;">
+
+    <h2>Percentage Increase / Decrease</h2>
+
+    <div class="input-group">
+        <input type="number" id="oldValue" placeholder="Old Value">
+    </div>
+
+    <div class="input-group">
+        <input type="number" id="newValue" placeholder="New Value">
+    </div>
+
+    <button class="btn" onclick="calculateChange()">
+        Calculate
+    </button>
+
+    <div id="result3" class="result-area"></div>
+
+</div>
+
+<div class="seo-content">
+
+    <h2>What Is a Percentage Calculator?</h2>
+
+    <p>
+        A Percentage Calculator helps calculate percentages,
+        percentage increases, percentage decreases, and percentage differences
+        quickly without manual calculations.
+    </p>
+
+    <h2>How to Use This Tool</h2>
+
+    <ol>
+        <li>Choose the type of percentage calculation.</li>
+        <li>Enter the required values.</li>
+        <li>Click Calculate.</li>
+        <li>View the result instantly.</li>
+    </ol>
+
+    <h2>Common Uses of Percentage Calculations</h2>
+
+    <ul>
+        <li>Shopping discounts</li>
+        <li>Tax calculations</li>
+        <li>Exam results</li>
+        <li>Business reports</li>
+        <li>Profit and loss calculations</li>
+    </ul>
+
+    <div class="faq-section">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+            <summary>How do I calculate a percentage?</summary>
+            <p>Divide the value by the total and multiply by 100.</p>
+        </details>
+
+        <details>
+            <summary>How do I calculate percentage increase?</summary>
+            <p>Subtract the old value from the new value, divide by the old value, and multiply by 100.</p>
+        </details>
+
+        <details>
+            <summary>Can I calculate discounts?</summary>
+            <p>Yes. This calculator can help determine discounts and savings.</p>
+        </details>
+
+    </div>
+
+</div>
+```
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+function calculatePercentage() {
+
+    let percent =
+        parseFloat(document.getElementById("percent1").value);
+
+    let number =
+        parseFloat(document.getElementById("number1").value);
+
+    let result = (percent / 100) * number;
+
+    let box = document.getElementById("result1");
+
+    box.innerHTML =
+        `<h3>Result: ${result.toFixed(2)}</h3>`;
+
+    box.style.display = "block";
+}
+
+function calculatePercentOf() {
+
+    let value =
+        parseFloat(document.getElementById("value2").value);
+
+    let total =
+        parseFloat(document.getElementById("total2").value);
+
+    let result = (value / total) * 100;
+
+    let box = document.getElementById("result2");
+
+    box.innerHTML =
+        `<h3>${result.toFixed(2)}%</h3>`;
+
+    box.style.display = "block";
+}
+
+function calculateChange() {
+
+    let oldValue =
+        parseFloat(document.getElementById("oldValue").value);
+
+    let newValue =
+        parseFloat(document.getElementById("newValue").value);
+
+    let result =
+        ((newValue - oldValue) / oldValue) * 100;
+
+    let box = document.getElementById("result3");
+
+    let type =
+        result >= 0 ? "Increase" : "Decrease";
+
+    box.innerHTML =
+        `<h3>${Math.abs(result).toFixed(2)}% ${type}</h3>`;
+
+    box.style.display = "block";
+}
+
+</script>
+
+{% endblock %}
