@@ -23,6 +23,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'image-compressor','name': 'Image Compressor','description': 'Compress JPG, PNG and WEBP images online without losing quality.','icon': 'fa-compress'},
         {'id': 'percentage-calculator', 'name': 'Percentage Calculator', 'description': 'Calculate percentages, increases, decreases and percentage differences instantly.', 'icon': 'fa-percent'},
         {'id': 'image-format-converter', 'name': 'Image Format Converter', 'description': 'Convert images between JPG, PNG, WEBP and other popular formats.', 'icon': 'fa-image'},
         {'id': 'meta-tag-generator', 'name': 'Meta Tag Generator', 'description': 'Generate SEO meta tags for your website instantly.', 'icon': 'fa-code'},

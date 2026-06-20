@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Image Compressor - Compress Images Online Free{% endblock %}
+
+{% block description %}
+Compress JPG, PNG, and WEBP images online. Reduce image file size while maintaining quality.
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+```
+<div class="tool-header text-center">
+    <h1>Image Compressor</h1>
+    <p>Reduce image file size instantly while maintaining quality.</p>
+</div>
+
+<div class="tool-container">
+
+    <div class="input-group">
+        <label>Select Image</label>
+        <input type="file" id="imageInput" accept="image/*">
+    </div>
+
+    <div class="input-group">
+        <label>Compression Quality</label>
+        <input type="range" id="quality" min="10" max="100" value="70">
+        <span id="qualityValue">70%</span>
+    </div>
+
+    <button class="btn" onclick="compressImage()">
+        Compress Image
+    </button>
+
+    <div id="result" class="result-area">
+        <p id="sizeInfo"></p>
+        <a id="downloadLink" class="btn" download>
+            Download Compressed Image
+        </a>
+    </div>
+
+</div>
+
+<div class="seo-content">
+
+    <h2>What Is an Image Compressor?</h2>
+
+    <p>
+        An image compressor reduces image file size while preserving visual quality.
+        Smaller images load faster, improve website speed, and save storage space.
+    </p>
+
+    <h2>Benefits of Compressing Images</h2>
+
+    <ul>
+        <li>Faster website loading</li>
+        <li>Better SEO performance</li>
+        <li>Reduced storage usage</li>
+        <li>Improved user experience</li>
+    </ul>
+
+    <h2>How to Use</h2>
+
+    <ol>
+        <li>Select an image.</li>
+        <li>Choose compression quality.</li>
+        <li>Click Compress Image.</li>
+        <li>Download the optimized image.</li>
+    </ol>
+
+    <div class="faq-section">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+            <summary>Will image quality decrease?</summary>
+            <p>Some quality reduction may occur depending on the compression level selected.</p>
+        </details>
+
+        <details>
+            <summary>Which formats are supported?</summary>
+            <p>JPG, PNG, WEBP and most common image formats.</p>
+        </details>
+
+        <details>
+            <summary>Is the tool free?</summary>
+            <p>Yes, our Image Compressor is completely free.</p>
+        </details>
+
+    </div>
+
+</div>
+```
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+const qualitySlider = document.getElementById("quality");
+
+qualitySlider.addEventListener("input", function() {
+    document.getElementById("qualityValue").innerText =
+        this.value + "%";
+});
+
+function compressImage() {
+
+    const file =
+        document.getElementById("imageInput").files[0];
+
+    if (!file) {
+        alert("Please select an image");
+        return;
+    }
+
+    const quality =
+        parseInt(document.getElementById("quality").value) / 100;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+        const img = new Image();
+
+        img.onload = function() {
+
+            let width = img.width;
+            let height = img.height;
+
+            const maxWidth = 1920;
+
+            if(width > maxWidth) {
+                height = height * (maxWidth / width);
+                width = maxWidth;
+            }
+
+            const canvas =
+                document.createElement("canvas");
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx =
+                canvas.getContext("2d");
+
+            ctx.drawImage(img, 0, 0, width, height);
+
+            let mimeType = file.type;
+
+            if (
+                mimeType !== "image/jpeg" &&
+                mimeType !== "image/webp"
+            ) {
+                mimeType = "image/jpeg";
+            }
+
+            canvas.toBlob(function(blob) {
+
+                const originalKB =
+                    (file.size / 1024).toFixed(2);
+
+                const compressedKB =
+                    (blob.size / 1024).toFixed(2);
+
+                const url =
+                    URL.createObjectURL(blob);
+
+                const downloadLink =
+                    document.getElementById("downloadLink");
+
+                downloadLink.href = url;
+
+                downloadLink.download =
+                    "compressed-image.jpg";
+
+                document.getElementById("sizeInfo").innerHTML =
+                    `<strong>Original Size:</strong> ${originalKB} KB<br>
+                     <strong>Compressed Size:</strong> ${compressedKB} KB<br>
+                     <strong>Reduction:</strong>
+                     ${((1 - blob.size/file.size) * 100).toFixed(1)}%`;
+
+                document.getElementById("result").style.display =
+                    "block";
+
+            }, mimeType, quality);
+        };
+
+        img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+</script>
+
+{% endblock %}
