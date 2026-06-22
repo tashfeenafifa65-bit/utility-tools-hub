@@ -5,6 +5,9 @@ from flask_sqlalchemy import SQLAlchemy
 from PIL import Image
 import io
 
+
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -23,6 +26,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
+        {'id': 'image-resizer','name': 'Image Resizer','description': 'Resize JPG, PNG, and WEBP images online instantly.','icon': 'fa-expand'},
         {'id': 'image-compressor','name': 'Image Compressor','description': 'Compress JPG, PNG and WEBP images online without losing quality.','icon': 'fa-compress'},
         {'id': 'percentage-calculator', 'name': 'Percentage Calculator', 'description': 'Calculate percentages, increases, decreases and percentage differences instantly.', 'icon': 'fa-percent'},
         {'id': 'image-format-converter', 'name': 'Image Format Converter', 'description': 'Convert images between JPG, PNG, WEBP and other popular formats.', 'icon': 'fa-image'},

@@ -379,3 +379,23 @@ input:focus, textarea:focus {
 .faq-section details p {
     margin-top: 10px;
 }
+.aspect-ratio-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 8px;
+    width: fit-content;
+    margin: 15px 0;
+}
+
+.aspect-ratio-container input[type="checkbox"] {
+    margin: 0;
+}
+
+.aspect-ratio-container label,
+.aspect-ratio-container span,
+.ratio-text {
+    margin: 0;
+    width: auto !important;
+    white-space: nowrap;
+}

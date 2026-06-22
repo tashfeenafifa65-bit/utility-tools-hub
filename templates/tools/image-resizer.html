@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+
+{% block title %}Image Resizer - Resize Images Online Free{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="tool-header text-center">
+    <h1>Image Resizer</h1>
+    <p>Resize images by dimensions, percentage or social media presets.</p>
+</div>
+
+<div class="tool-container">
+
+    <div class="input-group">
+        <label>Select Image</label>
+        <input type="file" id="imageInput" accept="image/*">
+    </div>
+
+    <img id="previewImage"
+         style="max-width:300px;display:none;margin:20px auto;">
+
+    <h2>Resize Settings</h2>
+
+    <div style="margin-bottom:20px;">
+
+        <button class="btn" onclick="showTab('size')">
+            By Size
+        </button>
+
+        <button class="btn" onclick="showTab('percentage')">
+            As Percentage
+        </button>
+
+        <button class="btn" onclick="showTab('social')">
+            Social Media
+        </button>
+
+    </div>
+
+    <div id="sizeTab">
+
+        <div class="input-group">
+            <label>Width</label>
+            <input type="number"
+                   id="width"
+                   placeholder="Enter Width">
+        </div>
+
+        <div class="input-group">
+            <label>Height</label>
+            <input type="number"
+                   id="height"
+                   placeholder="Enter Height">
+        </div>
+
+        <div class="input-group">
+            <label>Unit</label>
+
+            <select id="unit">
+                <option value="px">Pixel</option>
+                <option value="inch">Inch</option>
+                <option value="cm">Centimeter</option>
+                <option value="mm">Millimeter</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div id="percentageTab" style="display:none;">
+
+        <div class="input-group">
+
+            <label>Resize Percentage</label>
+
+            <select id="percentage"
+                    onchange="applyPercentage()">
+
+                <option value="">
+                    Select Percentage
+                </option>
+
+                <option value="25">25%</option>
+                <option value="50">50%</option>
+                <option value="75">75%</option>
+                <option value="100">100%</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <div id="socialTab" style="display:none;">
+
+        <div class="input-group">
+
+            <label>Social Media Presets</label>
+
+            <select id="socialSize"
+                    onchange="applySocialSize()">
+
+                <option value="">
+                    Select Platform
+                </option>
+
+                <option value="1080x1080">
+                    Instagram Post
+                </option>
+
+                <option value="1080x1920">
+                    Instagram Story
+                </option>
+
+                <option value="1200x630">
+                    Facebook Post
+                </option>
+
+                <option value="1280x720">
+                    YouTube Thumbnail
+                </option>
+
+                <option value="1200x675">
+                    Twitter/X Post
+                </option>
+
+                <option value="1200x627">
+                    LinkedIn Post
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+   <div class="aspect-ratio-container">
+    <input type="checkbox" id="lockRatio" checked>
+    <label for="lockRatio">Lock Aspect Ratio</label>
+</div>
+    <button class="btn"
+            onclick="resizeImage()">
+
+        Resize Image
+
+    </button>
+
+    <div id="result"
+         class="result-area"
+         style="display:none;">
+
+        <p id="imageInfo"></p>
+
+        <a id="downloadLink"
+           class="btn"
+           download>
+
+            Download Resized Image
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="seo-content">
+
+    <h2>Resize Images Online</h2>
+
+    <p>
+        Resize JPG, PNG and WEBP images online.
+        Change dimensions, reduce size, and create
+        images for social media platforms.
+    </p>
+
+    <h2>Benefits of Resizing Images</h2> 
+    <ul> <li>Improve website loading speed</li> 
+        <li>Reduce file size</li> 
+        <li>Fit social media image requirements</li> 
+        <li>Optimize images for online use</li> </ul> 
+    <h2>How to Use</h2> 
+    <ol> <li>Upload an image.</li>
+         <li>Enter the desired width and height.</li> 
+         <li>Click Resize Image.</li> 
+         <li>Download the resized image.</li> 
+    </ol> 
+ 
+    <div class="faq-section"> 
+    <h2> Frequently Asked Questions</h2> 
+    <details> 
+    <summary>Does resizing reduce image quality?</summary> 
+        <p>Quality is generally preserved, though extreme resizing may affect appearance.</p> </details>
+         <details> <summary>Which image formats are supported?</summary> 
+            <p>JPG, PNG, WEBP, and most common image formats.</p> </details> 
+            <details> <summary>Is this Image Resizer free?</summary> 
+                <p>Yes, the tool is completely free to use.</p> </details> 
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+let originalWidth = 0;
+let originalHeight = 0;
+let aspectRatio = 1;
+
+function showTab(tab){
+
+    document.getElementById("sizeTab").style.display = "none";
+    document.getElementById("percentageTab").style.display = "none";
+    document.getElementById("socialTab").style.display = "none";
+
+    if(tab === "size")
+        document.getElementById("sizeTab").style.display = "block";
+
+    if(tab === "percentage")
+        document.getElementById("percentageTab").style.display = "block";
+
+    if(tab === "social")
+        document.getElementById("socialTab").style.display = "block";
+}
+
+document.getElementById("imageInput")
+.addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+        const img = new Image();
+
+        img.onload = function(){
+
+            originalWidth = img.width;
+            originalHeight = img.height;
+
+            aspectRatio =
+                originalWidth / originalHeight;
+
+            document.getElementById("width").value =
+                originalWidth;
+
+            document.getElementById("height").value =
+                originalHeight;
+
+            const preview =
+                document.getElementById("previewImage");
+
+            preview.src = event.target.result;
+            preview.style.display = "block";
+        };
+
+        img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+});
+
+document.getElementById("width")
+.addEventListener("input", function(){
+
+    if(document.getElementById("lockRatio").checked){
+
+        document.getElementById("height").value =
+            Math.round(this.value / aspectRatio);
+    }
+});
+
+function applyPercentage(){
+
+    const p =
+        parseInt(
+            document.getElementById("percentage").value
+        );
+
+    if(!p) return;
+
+    document.getElementById("width").value =
+        Math.round(originalWidth * p / 100);
+
+    document.getElementById("height").value =
+        Math.round(originalHeight * p / 100);
+}
+
+function applySocialSize(){
+
+    const value =
+        document.getElementById("socialSize").value;
+
+    if(!value) return;
+
+    const size =
+        value.split("x");
+
+    document.getElementById("width").value =
+        size[0];
+
+    document.getElementById("height").value =
+        size[1];
+}
+
+function resizeImage(){
+
+    const file =
+        document.getElementById("imageInput").files[0];
+
+    if(!file){
+        alert("Please select an image");
+        return;
+    }
+
+    const width =
+        parseInt(
+            document.getElementById("width").value
+        );
+
+    const height =
+        parseInt(
+            document.getElementById("height").value
+        );
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function(event){
+
+        const img =
+            new Image();
+
+        img.onload = function(){
+
+            const canvas =
+                document.createElement("canvas");
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx =
+                canvas.getContext("2d");
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+            );
+
+            canvas.toBlob(function(blob){
+
+                const url =
+                    URL.createObjectURL(blob);
+
+                document.getElementById("downloadLink").href =
+                    url;
+
+                document.getElementById("downloadLink").download =
+                    "resized-image.jpg";
+
+                document.getElementById("imageInfo").innerHTML =
+                    `
+                    Original:
+                    ${originalWidth} × ${originalHeight}px
+                    <br>
+                    New:
+                    ${width} × ${height}px
+                    <br>
+                    File Size:
+                    ${(blob.size/1024).toFixed(2)} KB
+                    `;
+
+                document.getElementById("result").style.display =
+                    "block";
+
+            }, "image/jpeg", 0.9);
+
+        };
+
+        img.src =
+            event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+</script>
+
+{% endblock %}
+
