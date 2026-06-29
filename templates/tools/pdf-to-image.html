@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}PDF to Image Converter - Convert PDF to JPG, PNG, WEBP & TIFF Online{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="tool-header text-center">
+    <h1>PDF to Image Converter</h1>
+    <p>
+        Convert PDF pages into JPG, PNG, WEBP, or TIFF images online for free.
+        Extract all pages from a PDF and download them as images.
+    </p>
+</div>
+
+<div class="container">
+
+    <form action="/convert-pdf-to-image"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <div class="input-group">
+
+            <label>Select PDF File</label>
+
+            <input type="file"
+                   name="pdf"
+                   accept=".pdf"
+                   required>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Output Format</label>
+
+            <select name="format">
+
+                <option value="jpg">JPG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WEBP</option>
+                <option value="tiff">TIFF</option>
+
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn-primary">
+            Convert PDF
+        </button>
+
+    </form>
+
+</div>
+
+<div class="seo-content">
+
+    <h2>Convert PDF to Images Online</h2>
+
+    <p>
+        Our free PDF to Image Converter allows you to quickly convert PDF
+        documents into high-quality image files. Convert every page into
+        JPG, PNG, WEBP, or TIFF format and download the results instantly.
+    </p>
+
+    <h2>Supported Formats</h2>
+
+    <ul>
+        <li>PDF to JPG</li>
+        <li>PDF to PNG</li>
+        <li>PDF to WEBP</li>
+        <li>PDF to TIFF</li>
+    </ul>
+
+    <h2>Why Use PDF to Image Converter?</h2>
+
+    <p>
+        Converting PDFs into image formats makes it easier to share,
+        upload, edit, and publish document content on websites,
+        social media platforms, and presentations.
+    </p>
+
+    <ul>
+        <li>Fast PDF conversion</li>
+        <li>High-quality output</li>
+        <li>Supports multiple image formats</li>
+        <li>No software installation required</li>
+        <li>Secure and easy to use</li>
+    </ul>
+
+    <h2>How to Convert PDF to Image</h2>
+
+    <ol>
+        <li>Select your PDF file.</li>
+        <li>Choose the desired image format.</li>
+        <li>Click the Convert PDF button.</li>
+        <li>Wait for processing to complete.</li>
+        <li>Download your converted images.</li>
+    </ol>
+
+    <h2>Benefits of PDF to Image Conversion</h2>
+
+    <p>
+        PDF images can be used for blogs, websites, social media,
+        presentations, printing, archiving, and content sharing.
+        Images are easier to preview and compatible with virtually
+        every device and platform.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+        <summary>Is this PDF to Image Converter free?</summary>
+        <p>
+            Yes. The tool is completely free to use.
+        </p>
+    </details>
+
+    <details>
+        <summary>Can I convert PDF to JPG?</summary>
+        <p>
+            Yes. JPG is fully supported.
+        </p>
+    </details>
+
+    <details>
+        <summary>Can I convert PDF to PNG?</summary>
+        <p>
+            Yes. PNG conversion is supported with high image quality.
+        </p>
+    </details>
+
+    <details>
+        <summary>Can I convert PDF to WEBP?</summary>
+        <p>
+            Yes. WEBP output is available for smaller file sizes.
+        </p>
+    </details>
+
+    <details>
+        <summary>Will all PDF pages be converted?</summary>
+        <p>
+            Yes. Every page in the uploaded PDF will be converted.
+        </p>
+    </details>
+
+</div>
+
+
+</div>
+
+{% endblock %}

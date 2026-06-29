@@ -1,0 +1,481 @@
+{% extends "base.html" %}
+
+{% block title %}AI Background Remover - Remove Image Background Online Free{% endblock %}
+
+{% block meta_description %}
+Remove image backgrounds instantly using AI. Upload JPG, PNG or WEBP images and download transparent PNG images for free. Fast, secure and unlimited.
+{% endblock %}
+
+{% block content %}
+
+<section class="tool-hero">
+
+<div class="container">
+
+    <div class="hero-content">
+
+        <h1>AI Background Remover</h1>
+
+        <p>
+            Remove image backgrounds automatically using AI.
+            Upload your image and download a transparent PNG in seconds.
+            Free, secure and no registration required.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="tool-section">
+
+<div class="container">
+
+<div class="tool-card">
+
+<form
+id="backgroundForm"
+enctype="multipart/form-data">
+
+<div class="upload-area" id="dropArea">
+
+<div class="upload-icon">
+
+<i class="fas fa-cloud-upload-alt"></i>
+
+</div>
+
+<h2>Drag & Drop Image Here</h2>
+
+<p>or</p>
+
+<label class="upload-btn">
+
+Choose Image
+
+<input
+type="file"
+id="image"
+name="image"
+accept=".jpg,.jpeg,.png,.webp"
+hidden>
+
+</label>
+
+<p class="small-text">
+
+Supports JPG, JPEG, PNG and WEBP
+
+</p>
+
+</div>
+
+<div
+id="previewContainer"
+style="display:none;">
+
+<div class="comparison-grid">
+
+<div class="image-card">
+
+<h3>Original Image</h3>
+
+<img
+id="previewImage"
+class="preview-image">
+
+</div>
+
+<div class="image-card">
+
+<h3>Background Removed</h3>
+
+<div
+id="loading"
+style="display:none;">
+
+<div class="loader"></div>
+
+<p>
+
+Removing Background...
+
+</p>
+
+</div>
+
+<img
+id="resultImage"
+class="preview-image"
+style="display:none;">
+
+<a
+id="downloadBtn"
+class="download-btn"
+style="display:none;"
+download="background_removed.png">
+
+Download PNG
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="button-area">
+
+<button
+type="button"
+id="removeBtn"
+class="primary-btn">
+
+Remove Background
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+<section class="seo-section">
+
+<div class="container">
+
+<div class="seo-content">
+
+<h2>Remove Image Background Online with AI</h2>
+
+<p>
+
+Our AI-powered Background Remover automatically detects the subject of your photo and removes the background while preserving fine details like hair, edges, transparent objects, and shadows. Upload your image and download a high-quality transparent PNG in just a few seconds.
+
+</p>
+
+<h2>Why Use Our AI Background Remover?</h2>
+
+<div class="feature-grid">
+
+<div class="feature-box">
+
+<h3>⚡ Fast Processing</h3>
+
+<p>Remove image backgrounds within seconds using advanced AI.</p>
+
+</div>
+
+<div class="feature-box">
+
+<h3>🎯 High Accuracy</h3>
+
+<p>Preserves fine details such as hair, clothing and object edges.</p>
+
+</div>
+
+<div class="feature-box">
+
+<h3>🔒 Secure</h3>
+
+<p>Your uploaded images are processed securely and are not permanently stored.</p>
+
+</div>
+
+<div class="feature-box">
+
+<h3>💯 Free to Use</h3>
+
+<p>Unlimited background removal without registration.</p>
+
+</div>
+
+</div>
+
+<h2>Supported Image Formats</h2>
+
+<ul class="tool-list">
+
+<li>JPG</li>
+
+<li>JPEG</li>
+
+<li>PNG</li>
+
+<li>WEBP</li>
+
+</ul>
+
+<h2>How to Remove Background</h2>
+
+<ol class="tool-list">
+
+<li>Click <strong>Choose Image</strong>.</li>
+
+<li>Select your photo.</li>
+
+<li>Preview the uploaded image.</li>
+
+<li>Click <strong>Remove Background</strong>.</li>
+
+<li>Wait a few seconds.</li>
+
+<li>Preview the transparent result.</li>
+
+<li>Click <strong>Download PNG</strong>.</li>
+
+</ol>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+
+<h3>Is this Background Remover free?</h3>
+
+<p>
+
+Yes. You can remove image backgrounds online for free.
+
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>Does it reduce image quality?</h3>
+
+<p>
+
+No. The AI keeps the original image quality while removing the background.
+
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>Which image formats are supported?</h3>
+
+<p>
+
+JPG, JPEG, PNG and WEBP images are supported.
+
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>Can I use transparent PNGs commercially?</h3>
+
+<p>
+
+Yes. Downloaded PNG images can be used according to your project's licensing requirements.
+
+</p>
+
+</div>
+
+<h2>Related Tools</h2>
+
+<div class="related-tools">
+
+<a href="/image-compressor">Image Compressor</a>
+
+<a href="/image-resizer">Image Resizer</a>
+
+<a href="/image-converter">Image Converter</a>
+
+<a href="/pdf-to-image">PDF to Image</a>
+
+<a href="/meta-tag-generator">Meta Tag Generator</a>
+
+<a href="/qr-code-generator">QR Code Generator</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const form = document.getElementById("backgroundForm");
+const fileInput = document.getElementById("image");
+const dropArea = document.getElementById("dropArea");
+
+const previewContainer = document.getElementById("previewContainer");
+const previewImage = document.getElementById("previewImage");
+const resultImage = document.getElementById("resultImage");
+
+const removeBtn = document.getElementById("removeBtn");
+const loading = document.getElementById("loading");
+const downloadBtn = document.getElementById("downloadBtn");
+
+// -----------------------------
+// Preview Selected Image
+// -----------------------------
+
+function previewFile(file){
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        previewImage.src = e.target.result;
+
+        previewContainer.style.display = "block";
+
+        resultImage.style.display = "none";
+
+        downloadBtn.style.display = "none";
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+fileInput.addEventListener("change", function(){
+
+    previewFile(this.files[0]);
+
+});
+
+// -----------------------------
+// Drag & Drop
+// -----------------------------
+
+["dragenter","dragover"].forEach(eventName=>{
+
+    dropArea.addEventListener(eventName,function(e){
+
+        e.preventDefault();
+
+        dropArea.classList.add("dragover");
+
+    });
+
+});
+
+["dragleave","drop"].forEach(eventName=>{
+
+    dropArea.addEventListener(eventName,function(e){
+
+        e.preventDefault();
+
+        dropArea.classList.remove("dragover");
+
+    });
+
+});
+
+dropArea.addEventListener("drop",function(e){
+
+    const files=e.dataTransfer.files;
+
+    if(files.length){
+
+        fileInput.files=files;
+
+        previewFile(files[0]);
+
+    }
+
+});
+
+// -----------------------------
+// Remove Background
+// -----------------------------
+
+removeBtn.addEventListener("click", async function(){
+
+    if(fileInput.files.length===0){
+
+        alert("Please select an image.");
+
+        return;
+
+    }
+
+    const formData=new FormData(form);
+
+    loading.style.display="block";
+
+    resultImage.style.display="none";
+
+    downloadBtn.style.display="none";
+
+    removeBtn.disabled=true;
+
+    removeBtn.innerHTML="Processing...";
+
+    try{
+
+        const response=await fetch("/remove-background",{
+
+            method:"POST",
+
+            body:formData
+
+        });
+
+        const data=await response.json();
+
+        loading.style.display="none";
+
+        removeBtn.disabled=false;
+
+        removeBtn.innerHTML="Remove Background";
+
+        if(data.success){
+
+            resultImage.src=data.image;
+
+            resultImage.style.display="block";
+
+            downloadBtn.href=data.image;
+
+            downloadBtn.style.display="inline-block";
+
+        }else{
+
+            alert(data.error);
+
+        }
+
+    }catch(error){
+
+        loading.style.display="none";
+
+        removeBtn.disabled=false;
+
+        removeBtn.innerHTML="Remove Background";
+
+        alert("Something went wrong.");
+
+        console.error(error);
+
+    }
+
+});
+
+});
+
+
+</script>
+{% endblock %}
