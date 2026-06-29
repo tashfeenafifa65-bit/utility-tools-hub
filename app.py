@@ -8,7 +8,7 @@ from pdf2image import convert_from_path
 from zipfile import ZipFile
 import tempfile
 import shutil
-from rembg import remove
+#from rembg import remove
 from PIL import Image
 import io
 import os
@@ -37,7 +37,7 @@ with app.app_context():
 @app.route('/')
 def index():
     tools = [
-        {'id': 'background-remover','name': 'AI Background Remover','description': 'Remove image backgrounds automatically using AI. Supports JPG, PNG and WEBP.','icon': 'fa-solid fa-scissors'},
+        #{'id': 'background-remover','name': 'AI Background Remover','description': 'Remove image backgrounds automatically using AI. Supports JPG, PNG and WEBP.','icon': 'fa-solid fa-scissors'},
         {'id': 'pdf-to-image','name': 'PDF to Image Converter','description': 'Convert PDF pages into JPG, PNG, WEBP and TIFF images online.','icon': 'fa-file-image'},
         {'id': 'image-resizer','name': 'Image Resizer','description': 'Resize JPG, PNG, and WEBP images online instantly.','icon': 'fa-expand'},
         {'id': 'image-compressor','name': 'Image Compressor','description': 'Compress JPG, PNG and WEBP images online without losing quality.','icon': 'fa-compress'},
@@ -161,34 +161,34 @@ def convert_pdf_to_image():
 from flask import jsonify
 import base64
 
-@app.route('/remove-background', methods=['POST'])
-def remove_background():
+# @app.route('/remove-background', methods=['POST'])
+# def remove_background():
 
 
-    if 'image' not in request.files:
-        return jsonify({"success":False})
+#     if 'image' not in request.files:
+#         return jsonify({"success":False})
 
-    file=request.files['image']
+#     file=request.files['image']
 
-    try:
+#     try:
 
-        input_bytes=file.read()
+#         input_bytes=file.read()
 
-        output_bytes=remove(input_bytes)
+#         output_bytes=remove(input_bytes)
 
-        image_base64=base64.b64encode(output_bytes).decode("utf-8")
+#         image_base64=base64.b64encode(output_bytes).decode("utf-8")
 
-        return jsonify({
-            "success":True,
-            "image":"data:image/png;base64,"+image_base64
-        })
+#         return jsonify({
+#             "success":True,
+#             "image":"data:image/png;base64,"+image_base64
+#         })
 
-    except Exception as e:
+#     except Exception as e:
 
-        return jsonify({
-            "success":False,
-            "error":str(e)
-        })
+#         return jsonify({
+#             "success":False,
+#             "error":str(e)
+#         })
 
 
 
